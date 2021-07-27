@@ -47,7 +47,7 @@ group :development, :test do
   # Use rspec for testing
   gem 'rspec-rails'
   # use factory_girl_rails for generating random test data
-  gem 'factory_girl_rails'
+  gem 'factory_bot'
   
   gem 'rails-controller-testing'
 end
