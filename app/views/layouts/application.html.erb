@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield :title %></title>
+
+    <title>
+    <% if content_for?(:title) %>
+      <%= yield :title %>
+    <% else %>
+      Bienvenido a frikr
+    <% end %>>
+    </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,13 +19,15 @@
   <body>
     <section>
       <nav>
-        <a href="/">inicio</a>
+        <%= link_to 'Inicio', welcome_home_path %>
       </nav>
     </section>
 
     <hr>
-    
+ 
     <section>
+      <p class="notice"><%= notice %> </p>
+      <p class="alert"><%= alert %> </p>
       <%= yield %>
     </section>
 
