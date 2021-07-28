@@ -3,7 +3,7 @@
 <% if @photos.any? %>
   <h2> ultimas fotos publicadas </h2>
   <% @photos.each do |photo| %>
-    <img src="<%=photo.url%>" alt=<%=photo.name%> height='150'>
+   <a href="/photos/<%= photo.id %>"> <img src="<%=photo.url%>" alt=<%=photo.name%> height='150'></a>
   <% end %>
 <% else %>
   <p>se el primero en publicar fotos<p>

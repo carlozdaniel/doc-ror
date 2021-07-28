@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Frikr</title>
+    <title><%= yield :title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,22 @@
   </head>
 
   <body>
-    <%= yield %>
+    <section>
+      <nav>
+        <a href="/">inicio</a>
+      </nav>
+    </section>
+
+    <hr>
+    
+    <section>
+      <%= yield %>
+    </section>
+
+    <hr>
+
+    <section>
+      <small>taller inc ~copy; Todos los derechos reservados</small>
+    </section>
   </body>
 </html>
