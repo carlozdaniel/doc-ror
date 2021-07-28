@@ -20,6 +20,12 @@
     <section>
       <nav>
         <%= link_to 'Inicio', welcome_home_path %>
+          <% if user_signed_in? %>
+        <%= link_to 'salir', logout_path %>
+        <% else %>
+          <%= link_to 'entrar', login_path %>
+        <% end %>
+
       </nav>
     </section>
 

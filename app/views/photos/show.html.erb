@@ -1,5 +1,7 @@
+<% content_for :title do %>
+<%= @photo.name %></h1>
+<% end %>
 <h1><%= @photo.name %></h1>
-
 
 <img src=<%= @photo.url %> alt=<%= @photo.name %> height="300">
 
@@ -7,4 +9,4 @@
 <p><%= @photo.description %></p>
 
 <h2> Autor </h2>
-<p><%= @photo.admin_user.email %></p>
+<p><%= @photo.user.email %></p>
