@@ -1,0 +1,1 @@
+BADWORDS = ['Abrazafarolas','Andurriasmo','Besugo','puta','joto','marica','maricon','verga']

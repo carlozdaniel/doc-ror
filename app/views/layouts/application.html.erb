@@ -20,10 +20,11 @@
     <section>
       <nav>
         <%= link_to 'Inicio', welcome_home_path %>
-          <% if user_signed_in? %>
-        <%= link_to 'salir', logout_path %>
+        <% if user_signed_in? %>
+          <%= link_to 'crear foto', photo_new_path %>
+          <%= link_to 'salir', destroy_user_session_path, method: :delete %>
         <% else %>
-          <%= link_to 'entrar', login_path %>
+          <%= link_to 'entrar', new_user_session_path %>
         <% end %>
 
       </nav>

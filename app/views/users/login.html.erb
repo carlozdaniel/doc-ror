@@ -1,9 +1,6 @@
+<%= form_for @user, url: { action: 'new_session'} do |f| %>
+  <%= f.text_field :email %>
+  <%= f.password_field :password %>
+  <%= f.submit 'entrar' %>
 
-<form method="post">
-  <div><input type="text" name="email" placeholder="Introduce tu email"></div>
-  <div><input type="password" name="password" placeholder="Introduce tu password"></div>
-
-  <div>
-    <button>entrar</button>
-  </div>
-</form>
+<% end %>
