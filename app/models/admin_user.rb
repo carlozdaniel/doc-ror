@@ -3,7 +3,7 @@ class AdminUser < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
-  has_many :photos
+
 
   after_create { |admin| admin.send_reset_password_instructions }
 

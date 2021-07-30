@@ -1,9 +1,12 @@
+
 <h1>Buenvenido a Frokr</h1>
 <p> esto es una coleccion de modificaciones <P>
 <% if @photos.any? %>
   <h2> ultimas fotos publicadas </h2>
   <% @photos.each do |photo| %>
-   <a href="/photos/<%= photo.id %>"> <img src="<%=photo.url%>" alt=<%=photo.name%> height='150'></a>
+    <%= link_to photo_detail_path(photo) do %>
+      <img src="<%= photo.url %>" alt="<%= photo.name %>" height="150">
+    <% end %>
   <% end %>
 <% else %>
   <p>se el primero en publicar fotos<p>

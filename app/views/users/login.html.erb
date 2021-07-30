@@ -1,0 +1,6 @@
+<%= form_for @user, url: { action: 'new_session'} do |f| %>
+  <%= f.text_field :email %>
+  <%= f.password_field :password %>
+  <%= f.submit 'entrar' %>
+
+<% end %>

@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield :title %></title>
+
+    <title>
+    <% if content_for?(:title) %>
+      <%= yield :title %>
+    <% else %>
+      Bienvenido a frikr
+    <% end %>>
+    </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,13 +19,22 @@
   <body>
     <section>
       <nav>
-        <a href="/">inicio</a>
+        <%= link_to 'Inicio', welcome_home_path %>
+        <% if user_signed_in? %>
+          <%= link_to 'crear foto', photo_new_path %>
+          <%= link_to 'salir', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'entrar', new_user_session_path %>
+        <% end %>
+
       </nav>
     </section>
 
     <hr>
-    
+ 
     <section>
+      <p class="notice"><%= notice %> </p>
+      <p class="alert"><%= alert %> </p>
       <%= yield %>
     </section>
 
