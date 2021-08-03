@@ -1,8 +1,18 @@
 class PhotosController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  def new
-    @photo = Photo.new
+  skip_before_action :verify_authenticity_token, only: :new_session
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  include PhotosHelper
+  def index
+    @photos = get_possible_photos
   end
+
+  def new
+    @photos = current_user.photos
+  end
+
+def my_photos
+  @photos = current_user.photos
+end
 
   def create
     @photo = Photo.create(photo_params)
@@ -16,8 +26,38 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find_by_id(params[:id])
+    @possible_photos = get_possible_photos
+
+    @photo = @possible_photos.find_by_id(params[:id])
+    if @photo.nil?
+      render file: "#{Rails.root}/public/404.html", status: :not_found
+    else
+      render :show
+    end
   end
+
+  def edit
+    @photo = current_user.photos.find_by_id(params[:id])
+    if @photo.nil?
+      render file: "#{Rails.root}/public/404.html", status: :not_found
+    else
+      render :edit
+    end
+  end
+
+  def update
+    @photo = current_user.photos.find_by_id(params[:id])
+    if @photo.nil?
+      render file: "#{Rails.root}/public/404.html", status: :not_found
+    elsif @photo.update(photo_params)
+      flash[:notice] = 'la foto  se ha actualizado correctamente'
+      redirect_to photo_detail_path(@photo)
+    else
+      flash[:alert] = 'ha havido un error al guardar la foto #{@photo.name}'
+      render :edit
+    end
+  end
+
 
   private
   def photo_params

@@ -3,11 +3,7 @@
 <p> esto es una coleccion de modificaciones <P>
 <% if @photos.any? %>
   <h2> ultimas fotos publicadas </h2>
-  <% @photos.each do |photo| %>
-    <%= link_to photo_detail_path(photo) do %>
-      <img src="<%= photo.url %>" alt="<%= photo.name %>" height="150">
-    <% end %>
-  <% end %>
+ <% render partial: "/photos/photos_loop", object: @photos %>
 <% else %>
   <p>se el primero en publicar fotos<p>
 <% end %>
