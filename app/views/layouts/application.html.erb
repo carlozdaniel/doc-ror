@@ -20,7 +20,9 @@
     <section>
       <nav>
         <%= link_to 'Inicio', welcome_home_path %>
+        <%= link_to 'listado de foto', photos_index_path %>
         <% if user_signed_in? %>
+          <%= link_to 'mis fotos', my_photos_path %>
           <%= link_to 'crear foto', photo_new_path %>
           <%= link_to 'salir', destroy_user_session_path, method: :delete %>
         <% else %>

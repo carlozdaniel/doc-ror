@@ -10,3 +10,9 @@
 
 <h2> Autor </h2>
 <p><%= @photo.user.email %></p>
+
+
+<br><br>
+<% if @photo.user == current_user %>
+  <%= link_to 'Editar', photo_edit_path %>
+<% end %>

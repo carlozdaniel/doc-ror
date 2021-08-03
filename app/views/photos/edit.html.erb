@@ -1,0 +1,23 @@
+<img src="<%=@photo.url %>" alt="<%=@photo.name%>" height="300">
+
+<%= form_for @photo, url: {action: "update"} do |f| %>
+
+  <%= f.label :name, 'titulo'%>
+  <%= f.text_field :name, required: true%>
+  <br><br>
+  <%= f.label :url, 'url'%>
+  <%= f.text_field :url, required: true %>
+  <br><br>
+  <%= f.text_area :description %>
+  <%= f.label :description, 'description'%>
+  <br><br>
+  <%= f.label :visibility, 'visibility'%>
+  <%= f.select :visibility, Photo::visibilities.keys.to_a, required: true %>
+  <br><br>
+  <%= f.label :license, 'license'%>
+  <%= f.select :license, Photo::licenses.keys.to_a, required: true %>
+  <br><br>
+
+  <%= f.submit 'actualizar foto'%>
+
+<% end %>
