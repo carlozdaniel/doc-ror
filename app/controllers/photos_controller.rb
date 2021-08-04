@@ -18,7 +18,7 @@ end
     @photo = Photo.create(photo_params)
     @photo.user = current_user
     if @photo.save
-      redirect_to photo_detail_path(@photo), notice: "foto creada correctamente"
+      redirect_to photo_path(@photo), notice: "foto creada correctamente"
     else
       flash[:alert] = 'Ha habido un error al guardar la foto' + @photo.errors.full_messages.to_sentence
       render :new
@@ -51,11 +51,19 @@ end
       render file: "#{Rails.root}/public/404.html", status: :not_found
     elsif @photo.update(photo_params)
       flash[:notice] = 'la foto  se ha actualizado correctamente'
-      redirect_to photo_detail_path(@photo)
+      redirect_to photo_path(@photo)
     else
       flash[:alert] = 'ha havido un error al guardar la foto #{@photo.name}'
       render :edit
     end
+  end
+
+  def destroy
+    @photo = current_user.photos.find_by_id(params[:id])
+    @photo.destroy
+    flash[:notice] = 'la foto '+@photo.name+'se elimino correctamente'
+    redirect_to :my_photos
+
   end
 
 

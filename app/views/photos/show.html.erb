@@ -1,5 +1,5 @@
 <% content_for :title do %>
-<%= @photo.name %></h1>
+  <%= @photo.name %>
 <% end %>
 <h1><%= @photo.name %></h1>
 
@@ -14,5 +14,7 @@
 
 <br><br>
 <% if @photo.user == current_user %>
-  <%= link_to 'Editar', photo_edit_path %>
+  <%= link_to 'Editar', edit_photo_path %>
+  <%= link_to 'eliminar', photo_path, method: :delete, data: {confirm: 'estas seguro?'}%>
+
 <% end %>

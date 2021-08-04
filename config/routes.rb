@@ -5,13 +5,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   # photos controller
-  get 'photo',            to: 'photos#index',      as: 'photos_index'
-  get 'my_photos',        to: 'photos#my_photos',  as: 'my_photos'
-  get 'photos/new',       to: 'photos#new',        as: 'photo_new'
-  post 'photos',          to: 'photos#create',     as: 'photo_create'
-  get 'photos/:id',       to: 'photos#show',       as: "photo_detail"
-  get 'photos/:id/edit',  to: 'photos#edit',       as: "photo_edit"
-  patch 'photos/:id',     to: 'photos#update',     as: "photo_update"
+  get 'photos/my_photos', to: 'photos#my_photos',  as: 'my_photos'
+  resources :photos
 
 
   #welcome controller
