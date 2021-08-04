@@ -34,6 +34,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'figaro'
 
+# add bootstrap - styles
+gem 'bootstrap-sass', '~>3.3.6'
+gem 'autoprefixer-rails'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
