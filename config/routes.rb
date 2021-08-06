@@ -12,7 +12,13 @@ Rails.application.routes.draw do
   #welcome controller
   get 'welcome/index',    to: 'welcome#index',     as: 'welcome_home'
 
+  #api
 
+  namespace :api do
+    namespace :v1 do
+      resources :users, except: [:new, :edit]
+    end
+  end
   root to: 'welcome#index' 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
