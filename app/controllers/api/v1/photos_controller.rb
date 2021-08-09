@@ -12,6 +12,7 @@ class Api::V1::PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
+    render json: @photo
   end
 
   # POST /photos
@@ -20,7 +21,7 @@ class Api::V1::PhotosController < ApplicationController
     @photo = Photo.new(photo_params)
 
     if @photo.save
-      render :show, status: :created, location: @photo
+      render json: @photo
     else
       render json: @photo.errors, status: :unprocessable_entity
     end
@@ -30,7 +31,7 @@ class Api::V1::PhotosController < ApplicationController
   # PATCH/PUT /photos/1.json
   def update
     if @photo.update(photo_params)
-      render :show, status: :ok, location: @photo
+      render json: @photo
     else
       render json: @photo.errors, status: :unprocessable_entity
     end
