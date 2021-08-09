@@ -6,6 +6,7 @@ class Api::V1::PhotosController < ApplicationController
   # GET /photos.json
   def index
     @photos = Photo.all
+    render json: @photos
   end
 
   # GET /photos/1
