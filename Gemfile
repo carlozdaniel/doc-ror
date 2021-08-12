@@ -46,7 +46,9 @@ gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise'
 
 gem 'active_model_serializers'
-
+gem 'kaminari'
+gem 'api-pagination'
+gem "will_paginate"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

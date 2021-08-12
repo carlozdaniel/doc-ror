@@ -6,7 +6,7 @@ class Api::V1::PhotosController < ApplicationController
   # GET /photos.json
   def index
     @photos = Photo.all
-    render json: @photos
+    paginate json: @photos, per_page: 5
   end
 
   # GET /photos/1
