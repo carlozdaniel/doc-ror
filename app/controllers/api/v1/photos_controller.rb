@@ -2,12 +2,12 @@ class Api::V1::PhotosController < ApplicationController
   include Rails::Pagination
   skip_before_action :verify_authenticity_token
   before_action :set_photo, only: [:show, :update, :destroy ]
-  before_action :authenticate_user!, only: [:index, :show, :update, :destroy]
+  before_action :authenticate!, only: [:create, :update, :destroy]
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
-    paginate json: @photos, per_page: 5
+    @photos = get_possible_photos
+    paginate json: @photos, per_page: 10
   end
 
   # GET /photos/1
@@ -47,7 +47,8 @@ class Api::V1::PhotosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
-      @photo = Photo.find(params[:id])
+      @possible_photos = get_possible_photos
+      @photo = possible_photos.find_by_id(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

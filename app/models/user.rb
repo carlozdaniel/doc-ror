@@ -5,10 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :photos
 
+  #assign an api key on create
   before_create do |user|
     user.api_key = user.generate_api_key
   end
 
+  #generate an unique api key
   def generate_api_key
     loop do
       token = Devise.friendly_token
