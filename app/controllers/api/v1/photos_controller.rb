@@ -6,14 +6,19 @@ class Api::V1::PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = get_possible_photos
+    @photos = 
+  
     paginate json: @photos, per_page: 10
   end
 
   # GET /photos/1
   # GET /photos/1.json
   def show
+    if @photos.nil?
+      render json: {error: 'foto no encontrada'}, status: :not_found
+    else
     render json: @photo
+    end
   end
 
   # POST /photos
@@ -48,7 +53,7 @@ class Api::V1::PhotosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
       @possible_photos = get_possible_photos
-      @photo = possible_photos.find_by_id(params[:id])
+      @photo = @possible_photos.find_by_id(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
