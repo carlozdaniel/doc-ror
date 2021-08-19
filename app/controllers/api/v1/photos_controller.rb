@@ -1,20 +1,20 @@
 class Api::V1::PhotosController < ApplicationController
   include Rails::Pagination
   skip_before_action :verify_authenticity_token
-  before_action :set_photo, only: [:show, :update, :destroy ]
+  before_action :set_photo, only: [:show]
   before_action :authenticate!, only: [:create, :update, :destroy]
+  include PhotosHelper
   # GET /photos
   # GET /photos.json
   def index
-    @photos = 
-  
+    @photos = get_possible_photos
     paginate json: @photos, per_page: 10
   end
 
   # GET /photos/1
   # GET /photos/1.json
   def show
-    if @photos.nil?
+    if @photo.nil?
       render json: {error: 'foto no encontrada'}, status: :not_found
     else
     render json: @photo
@@ -25,7 +25,7 @@ class Api::V1::PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(photo_params)
-
+    @photo.user = @current_user
     if @photo.save
       render json: @photo
     else
@@ -36,7 +36,10 @@ class Api::V1::PhotosController < ApplicationController
   # PATCH/PUT /photos/1
   # PATCH/PUT /photos/1.json
   def update
-    if @photo.update(photo_params)
+    @photo = current_user.photos.find_by_id(params[:id])
+    if @photo.nil?
+      render json: {error: 'foto no encontrada'}, status: :not_found
+    elsif @photo.update(photo_params)
       render json: @photo
     else
       render json: @photo.errors, status: :unprocessable_entity
@@ -46,7 +49,11 @@ class Api::V1::PhotosController < ApplicationController
   # DELETE /photos/1
   # DELETE /photos/1.json
   def destroy
-    @photo.destroy
+    if @photo.nill?
+      render json: {error: 'foto no encontrada'}, status: :not_found
+    else
+      @photo.destroy
+    end
   end
 
   private
@@ -58,6 +65,6 @@ class Api::V1::PhotosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_params
-      params.require(:photo).permit(:name, :url, :description, :visibility, :license, :user_id)
+      params.require(:photo).permit(:name, :url, :description, :visibility, :license)
     end
 end

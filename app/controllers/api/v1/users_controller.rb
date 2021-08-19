@@ -1,11 +1,11 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_user,  only: [:update, :show, :destroy]
-
-  def index
-    @users = User.all
-    render json: @users
-  end
+  before_action :authenticate!, except: [:create]
+  # def index
+  #   @users = User.all
+  #   render json: @users
+  # end
 
   def create
     @user = User.create(user_params)
@@ -25,16 +25,24 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
+    if @user
+      if @user.update(user_params)
+        render json: @user
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
+      else
+        render json: {errors: 'usuario no encontrado'}, status: :not_found
     end
   end
 
   def destroy
-    @user.destroy
-    render json: { result: 'user eliminado correctamente' }, status: :no_content
+    if @user
+      @user.destroy
+      render json: { result: 'user eliminado correctamente' }, status: :no_content
+    else
+      render json: {errors: 'usuario no encontrado'}, status: :not_found
+    end
   end
 
   private
