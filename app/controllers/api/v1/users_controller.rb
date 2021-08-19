@@ -48,6 +48,9 @@ class Api::V1::UsersController < ApplicationController
   private
   def set_user
     @user = User.find_by_id(params[:id])
+      if @user != @current_user
+        @user = nil
+      end
   end
   def user_params
     params.require(:user).permit(:id, :name, :email, :password)
