@@ -1,0 +1,10 @@
+
+es:
+  hello: "Hello world"
+
+  photos:
+    my_photos:
+      title: 'Mis fotos'
+
+    index:
+      title: 'Listado de fotos'
